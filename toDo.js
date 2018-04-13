@@ -57,6 +57,30 @@ let todoList = {
 
 };
 
+// document buttons
+let toggleAllButton = document.getElementById("buttonToggale");
+let displayTodoButton = document.getElementById("displayTodoButtons");
+// console.log(displayTodoButton);
+
+// events
+displayTodoButton.addEventListener("click", function() {
+  todoList.displayTodo();
+});
+toggleAllButton.addEventListener('click', function(){
+  todoList.toggleAll();
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
