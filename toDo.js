@@ -1,39 +1,42 @@
 let todoList = {
   todos: [],
-  displayTodo: function (){
-    if (this.todos.length === 0){
-      console.log("your todo list is empty");
-    } else {
-      for (let i = 0; i < this.todos.length; i++){
-        console.log('my todos:');
-        if (this.todos[i].completed === true){
-          console.log("(x)", this.todos[i].todoText);
-        } else {
-          console.log('()', this.todos[i].todoText);
-        }
-      }
-    }
-  },
+
+  // refractored display function
+
+  // displayTodo: function (){
+  //   if (this.todos.length === 0){
+  //     console.log("your todo list is empty");
+  //   } else {
+  //     for (let i = 0; i < this.todos.length; i++){
+  //       console.log('my todos:');
+  //       if (this.todos[i].completed === true){
+  //         console.log("(x)", this.todos[i].todoText);
+  //       } else {
+  //         console.log('()', this.todos[i].todoText);
+  //       }
+  //     }
+  //   }
+  // },
   addTodo: function(todoText){
     this.todos.push({
       todoText: todoText, // the value is the peramter the key is just todoText;
       completed: false,
     });
-    this.displayTodo();
+    // this.displayTodo();
   },
   changeTodo: function(postion, todoText){
     this.todos[postion].todoText = todoText;
     // this.todos[postion] this is an object now
-    this.displayTodo();
+    // this.displayTodo();
   },
   deleteTodo: function(postion){
     this.todos.splice(postion, 1)
-    this.displayTodo();
+    // this.displayTodo();
   },
   toggleCompleted: function(postion) {
     let todo = this.todos[postion];
     todo.completed = !todo.completed;
-    this.displayTodo();
+    // this.displayTodo();
   },
   toggleAll: function(){
     let totalTodos = this.todos.length;
@@ -53,7 +56,7 @@ let todoList = {
         this.todos[i].completed = true;
       }
     }
-    this.displayTodo();
+    // this.displayTodo();
   }
 
 };
@@ -74,14 +77,14 @@ let todoList = {
 // refractored into object;
 
 let handlers = {
-  displayTodos: function() {
-    todoList.displayTodo();
-  },
-
+  // displayTodos: function() {
+  //   todoList.displayTodo();
+  // },
   addTodo: function() {
     let AddTodoTextInput = document.getElementById("AddTodoTextInput");
     todoList.addTodo(AddTodoTextInput.value);
     AddTodoTextInput.value = "";
+    view.displayTodos();
   },
   changeTodo: function(){
     let changeTodoPostionInput = document.getElementById("changeTodoPostionInput");
@@ -89,21 +92,48 @@ let handlers = {
     todoList.changeTodo(changeTodoPostionInput.valueAsNumber,changeTodoTextInput.value);
     changeTodoPostionInput.value = "";
     changeTodoTextInput.value = "";
+    view.displayTodos();
   },
   deleteTodo: function() {
     let deleteTodoPostionInput = document.getElementById("deleteTodoPostionInput");
     todoList.deleteTodo(deleteTodoPostionInput.valueAsNumber);
     deleteTodoPostionInput.value = "";
+    view.displayTodos();
   },
   toggleCompleted: function() {
     let toggleCompletedPostionInput = document.getElementById("toggleCompletedPostionInput");
     todoList.toggleCompleted(toggleCompletedPostionInput.valueAsNumber);
-    // toggleCompletedPostionInput.value = "";
+    toggleCompletedPostionInput.value = "";
+    view.displayTodos();
   },
   toggleAll: function(){
     todoList.toggleAll();
+    view.displayTodos();
+
   }
 
+};
+
+let view = {
+  displayTodos: function (){
+    let todosUl = document.querySelector("ul");
+    todosUl.innerHTML = "";
+    for (let i = 0; i < todoList.todos.length; i++){
+      let todoLi = document.createElement("li");
+      let todo = todoList.todos[i];
+      let todoTextWithCompletion = "";
+
+      if (todo.completed === true){
+        todoTextWithCompletion = `(x) ${todo.todoText}`;
+      } else {
+        todoTextWithCompletion = `( ) ${todo.todoText}`;
+      }
+
+      // todoLi.textContent = todoList.todos[i].todoText;
+      todoLi.textContent = todoTextWithCompletion;
+      todosUl.appendChild(todoLi);
+    }
+  }
 };
 
 
@@ -118,16 +148,6 @@ let handlers = {
 
 
 
-// console.log(todoList.deleteTodo(0));
-// console.log(todoList.changeTodo(0,1));
-// console.log(todoList.addTodo("babganoosh"));
-// console.log(todoList.todos);
-// console.log(todoList.displayTodo());
-// console.log(todoList.changeTodo(0, "ass juice"));
-// console.log(todoList.todos);
-// console.log(todoList.toggleCompleted(0));
-// console.log(todoList.toggleAll());
-// console.log(todoList.displayTodo());
 
 
 
@@ -139,12 +159,11 @@ let handlers = {
 
 
 
-
-
+// inital strcuture
 
 // function displayTodo(arr){
 //   for(let i = 0; i < arr.length; i++){
-//     console.log(`todo ${i+1}: ${arr[i]}`); // TODO: change log to return
+//     console.log(`todo ${i+1}: ${arr[i]}`);
 //   }
 // }
 
@@ -167,3 +186,14 @@ let handlers = {
 //     }
 //   }
 // }
+
+// console.log(todoList.deleteTodo(0));
+// console.log(todoList.changeTodo(0,1));
+// console.log(todoList.addTodo("babganoosh"));
+// console.log(todoList.todos);
+// console.log(todoList.displayTodo());
+// console.log(todoList.changeTodo(0, "food"));
+// console.log(todoList.todos);
+// console.log(todoList.toggleCompleted(0));
+// console.log(todoList.toggleAll());
+// console.log(todoList.displayTodo());
