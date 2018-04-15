@@ -29,7 +29,8 @@ let todoList = {
   deleteTodo: function(postion){
     this.todos.splice(postion, 1)
     this.displayTodo();
-  }, toggleCompleted: function(postion) {
+  },
+  toggleCompleted: function(postion) {
     let todo = this.todos[postion];
     todo.completed = !todo.completed;
     this.displayTodo();
@@ -58,19 +59,52 @@ let todoList = {
 };
 
 // document buttons
-let toggleAllButton = document.getElementById("buttonToggale");
-let displayTodoButton = document.getElementById("displayTodoButtons");
+// let toggleAllButton = document.getElementById("buttonToggale");
+// let displayTodoButton = document.getElementById("displayTodoButtons");
 // console.log(displayTodoButton);
 
 // events
-displayTodoButton.addEventListener("click", function() {
-  todoList.displayTodo();
-});
-toggleAllButton.addEventListener('click', function(){
-  todoList.toggleAll();
-});
+// displayTodoButton.addEventListener("click", function() {
+//   todoList.displayTodo();
+// });
+// toggleAllButton.addEventListener("click", function(){
+//   todoList.toggleAll();
+// });
 
+// refractored into object;
 
+let handlers = {
+  displayTodos: function() {
+    todoList.displayTodo();
+  },
+
+  addTodo: function() {
+    let AddTodoTextInput = document.getElementById("AddTodoTextInput");
+    todoList.addTodo(AddTodoTextInput.value);
+    AddTodoTextInput.value = "";
+  },
+  changeTodo: function(){
+    let changeTodoPostionInput = document.getElementById("changeTodoPostionInput");
+    let changeTodoTextInput = document.getElementById("changeTodoTextInput");
+    todoList.changeTodo(changeTodoPostionInput.valueAsNumber,changeTodoTextInput.value);
+    changeTodoPostionInput.value = "";
+    changeTodoTextInput.value = "";
+  },
+  deleteTodo: function() {
+    let deleteTodoPostionInput = document.getElementById("deleteTodoPostionInput");
+    todoList.deleteTodo(deleteTodoPostionInput.valueAsNumber);
+    deleteTodoPostionInput.value = "";
+  },
+  toggleCompleted: function() {
+    let toggleCompletedPostionInput = document.getElementById("toggleCompletedPostionInput");
+    todoList.toggleCompleted(toggleCompletedPostionInput.valueAsNumber);
+    // toggleCompletedPostionInput.value = "";
+  },
+  toggleAll: function(){
+    todoList.toggleAll();
+  }
+
+};
 
 
 
@@ -86,13 +120,13 @@ toggleAllButton.addEventListener('click', function(){
 
 // console.log(todoList.deleteTodo(0));
 // console.log(todoList.changeTodo(0,1));
-console.log(todoList.addTodo("babganoosh"));
-console.log(todoList.todos);
+// console.log(todoList.addTodo("babganoosh"));
+// console.log(todoList.todos);
 // console.log(todoList.displayTodo());
 // console.log(todoList.changeTodo(0, "ass juice"));
 // console.log(todoList.todos);
-console.log(todoList.toggleCompleted(0));
-console.log(todoList.toggleAll());
+// console.log(todoList.toggleCompleted(0));
+// console.log(todoList.toggleAll());
 // console.log(todoList.displayTodo());
 
 
