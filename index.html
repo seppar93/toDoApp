@@ -1,47 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>ToDo App</title>
-    <link rel="stylesheet" href="todo.css">
+    <title>TodoApp</title>
+
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <h1>Todo List</h1>
-    <!-- <button type="button" id="displayTodoButtons">Display Todos</button> -->
-    <!-- <button type="button" id="buttonToggale">toggle All</button> -->
-    <div>
-      <!-- <button onclick="handlers.displayTodos()">Display Todos</button> -->
-      <button onclick="handlers.toggleAll()">Toggle All</button>
+    <div id="container">
+      <h1>To-Do List <i class="fa fa-check-square-o" aria-hidden="true"></i></h1>
+      <input type="text" placeholder="Add New Todo">
+      <ul>
+        <li><span><i class="fa fa-trash" aria-hidden="true"></i></span> Program</li>
+        <li><span><i class="fa fa-trash" aria-hidden="true"></i></span> Lift</li>
+        <li><span><i class="fa fa-trash" aria-hidden="true"></i></span> Meditate</li>
+        <li> <span><i class="fa fa-trash" aria-hidden="true"></i></span> Sleep </li>
 
-    </div>
-    <div>
-      <button type="button" onclick="handlers.addTodo()">Add Todo</button>
-      <input type="text" id="AddTodoTextInput">
-
-    </div>
-    <div>
-      <button type="button" onclick="handlers.changeTodo()">Change Todo</button>
-      <input id="changeTodoPostionInput" type="number" name="" value="">
-      <input id="changeTodoTextInput" type="text" name="" value="">
-    </div>
-
-    <!-- <div> replaced with event listner
-      <button type="button" onclick="handlers.deleteTodo()"> Delete</button>
-      <input type="number" id="deleteTodoPostionInput" value="">
-    </div> -->
-
-    <div>
-      <button type="button" onclick="handlers.toggleCompleted()" > Toggle completed</button>
-      <input id="toggleCompletedPostionInput" type="number">
+      </ul>
 
     </div>
 
-    <ul>
-    </ul>
 
 
 
-
-    <script type="text/javascript" src="toDo.js"></script>
   </body>
 </html>
