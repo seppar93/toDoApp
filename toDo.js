@@ -38,24 +38,35 @@ let todoList = {
     todo.completed = !todo.completed;
     // this.displayTodo();
   },
+
   toggleAll: function(){
     let totalTodos = this.todos.length;
     let completedTodos = 0;
-    for (let i = 0; i < totalTodos; i++){
-      if (this.todos[i].completed == true){
+    this.todos.forEach(function(todo){
+      if (todo.completed === true){
         completedTodos++;
       }
+    });
+    this.todos.forEach(function(todo){
+      if (completedTodos === totalTodos){
+        todo.completed = false;
+      } else {
+        todo.completed = true;
+      }
+    });
 
-    }
-    if(completedTodos === totalTodos) {
-      for (let i = 0; i < totalTodos; i++){
-        this.todos[i].completed = false;
-      }
-    } else {
-      for (let i = 0; i < totalTodos; i++){
-        this.todos[i].completed = true;
-      }
-    }
+
+    // for (let i = 0; i < totalTodos; i++){
+    //   if (this.todos[i].completed == true){
+    //     completedTodos++;
+    //   }
+    //
+    // }
+
+    //   // for (let i = 0; i < totalTodos; i++){
+    //   //   this.todos[i].completed = true;
+    //   // }
+    // }
     // this.displayTodo();
   }
 
@@ -119,24 +130,25 @@ let view = {
   displayTodos: function (){
     let todosUl = document.querySelector("ul");
     todosUl.innerHTML = "";
-    for (let i = 0; i < todoList.todos.length; i++){
+    todoList.todos.forEach(function(todo, postion){
       let todoLi = document.createElement("li");
-      let todo = todoList.todos[i];
+      // let todo = todoList.todos[i];
       let todoTextWithCompletion = "";
-
       if (todo.completed === true){
         todoTextWithCompletion = `(x) ${todo.todoText}`;
       } else {
         todoTextWithCompletion = `( ) ${todo.todoText}`;
       }
-
-      todoLi.id = i;
+      todoLi.id = postion;
 
       // todoLi.textContent = todoList.todos[i].todoText;
       todoLi.textContent = todoTextWithCompletion;
       todoLi.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);
-    }
+    }, this);
+    // for (let i = 0; i < todoList.todos.length; i++){
+
+    // }
   },
   createDeleteButton: function() {
     let deleteButton = document.createElement("button");
@@ -157,25 +169,6 @@ let view = {
   }
 };
 view.setUpEventListeners();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // inital strcuture
 
